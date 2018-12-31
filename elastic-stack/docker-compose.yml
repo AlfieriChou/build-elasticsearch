@@ -24,7 +24,7 @@ services:
     environment:
       - 'xpack.monitoring.elasticsearch.password=alfieri'
     volumes:
-      - ./esconfig/logstash.conf:/usr/share/logstash/pipeline/logstash.conf
+      - ./config/logstash.conf:/usr/share/logstash/pipeline/logstash.conf
     ports:
       - 5000:5000
     depends_on:
@@ -35,7 +35,7 @@ services:
   setup_logstash:
     image: centos:7
     volumes:
-      - './escripts/setup-logstash.sh:/usr/local/bin/setup-logstash.sh:ro'
+      - './scripts/setup-logstash.sh:/usr/local/bin/setup-logstash.sh:ro'
     command: ['/bin/bash', '-c', 'cat /usr/local/bin/setup-logstash.sh | tr -d "\r" | bash']
     environment:
       - 'ELASTIC_PASSWORD=alfieri'
@@ -45,7 +45,7 @@ services:
   setup_kibana:
     image: centos:7
     volumes:
-      - './escripts/setup-kibana.sh:/usr/local/bin/setup-kibana.sh:ro'
+      - './scripts/setup-kibana.sh:/usr/local/bin/setup-kibana.sh:ro'
     command: ['/bin/bash', '-c', 'cat /usr/local/bin/setup-kibana.sh | tr -d "\r" | bash']
     environment:
       - 'ELASTIC_PASSWORD=alfieri'
