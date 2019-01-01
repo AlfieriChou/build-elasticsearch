@@ -26,7 +26,7 @@ const start = async () => {
   // process file
   let currentIndex = 0
   const stream = _(
-    fs.createReadStream('../planet-latest_geonames.tsv').pipe(
+    fs.createReadStream('../planet-latest-100k_geonames.tsv').pipe(
       csv({
         separator: '\t'
       })

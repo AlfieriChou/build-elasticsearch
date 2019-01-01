@@ -1,15 +1,12 @@
 const elasticsearch = require('elasticsearch')
 
-const start = async () => {
-  const client = new elasticsearch.Client({
-    host: 'localhost:9200'
-    // log: 'trace',
-  })
+const client = new elasticsearch.Client({
+  host: 'localhost:9200'
+  // log: 'trace',
+})
 
+const search = async (query) => {
   await client.ping({ requestTimeout: 30000 })
-  console.log('pinged server')
-
-  const query = 'London'
 
   const resp = await client.search({
     index: 'osm',
@@ -42,8 +39,7 @@ const start = async () => {
     }
   })
   const { hits } = resp.hits
-
-  console.log(hits)
+  return hits
 }
 
-start()
+module.exports = search
